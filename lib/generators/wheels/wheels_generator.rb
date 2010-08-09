@@ -62,8 +62,14 @@ class WheelsGenerator < Rails::Generators::Base
     if (a=ask("Enter github username/reponame or blank for none.")).length > 0
       run "git remote add origin git@github.com:#{a}.git"
     end
+  end
 
-
+  def self.next_migration_number(dirname)
+    if ActiveRecord::Base.timestamped_migrations
+      Time.now.utc.strftime("%Y%m%d%H%M%S")
+    else
+      "%.3d" % (current_migration_number(dirname) + 1)
+    end
   end
 end
 
