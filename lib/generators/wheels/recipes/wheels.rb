@@ -15,7 +15,9 @@ stategies << lambda do
     "create_roles.rb"
   ].each {|file|  migration_template "db/migrate/#{file}", "db/migrate/#{file.split('.').first}"}
   route "wheels_resources"
-  attr_accessor :bucket, :access_key_id, :secret_access_key
+  class_eval do
+    attr_accessor :bucket, :access_key_id, :secret_access_key
+  end
   say ("If you have your S3 info handy, put it in now.")
   for attribute in [:bucket, :access_key_id, :secret_access_key]
     self.call "#{attribute}=", ask("What's the #{attribute.titleize}?")
