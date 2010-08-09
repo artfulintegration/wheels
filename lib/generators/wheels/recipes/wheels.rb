@@ -5,6 +5,7 @@ gem 'da_huangs_ruby_extensions'
 gem 'casey_jones'
 gem 'inherited_resources', '1.1.2'
 gem 'has_scope'
+gem 'wheels_routes'
 
 stategies << lambda do
   migration_template 'db/migrate/add_fields_to_users.rb', 'db/migrate/add_fields_to_users'
@@ -27,8 +28,8 @@ stategies << lambda do
   run "git submodule add git://github.com/tylergannon/ckeditor.git public/ckeditor"
 
   directory 'public', 'public'
+  directory 'app', 'app'
   gem "will_paginate", :git=>"http://github.com/mislav/will_paginate.git",
         :branch=>"rails3"
-
 end
 
