@@ -5,8 +5,6 @@ gem 'da_huangs_ruby_extensions'
 gem 'casey_jones'
 gem 'inherited_resources', '1.1.2'
 gem 'has_scope'
-gem "will_paginate", :git=>"http://github.com/mislav/will_paginate.git",
-        :branch=>"rails3"
 
 stategies << lambda do
   ["add_fields_to_users.rb",
@@ -26,6 +24,8 @@ stategies << lambda do
   run "git submodule add git://github.com/tylergannon/ckeditor.git public/ckeditor"
 
   directory 'public', 'public'
+  gem "will_paginate", :git=>"http://github.com/mislav/will_paginate.git",
+        :branch=>"rails3"
 
 end
 

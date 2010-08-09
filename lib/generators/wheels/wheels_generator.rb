@@ -1,4 +1,10 @@
+require 'rails/generators'
+require 'rails/generators/migration'
+require 'rails/generators/generated_attribute'
+require 'rails/generators/active_record'
+
 class WheelsGenerator < Rails::Generators::Base
+  include Rails::Generators::Migration
   require File.join(File.dirname(__FILE__), 'core_extensions.rb')
   source_root File.expand_path('../../../../', __FILE__)
   desc "Installs files needed for App Template gem."
@@ -32,7 +38,7 @@ class WheelsGenerator < Rails::Generators::Base
   end
 
   def bundle_install
-    run 'bundle install > lagger'
+    run 'bundle install'
   end
 
   def execute
