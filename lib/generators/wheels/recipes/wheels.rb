@@ -1,4 +1,4 @@
-gem 'rails3-generators', :git=>"git://github.com/tylergannon/rails3-generators.git"
+gem 'rails3-generators'
 gem 'RedCloth'
 gem 'acts-as-taggable-on'
 gem 'da_huangs_ruby_extensions'
@@ -7,7 +7,6 @@ gem 'inherited_resources', '1.1.2'
 gem 'has_scope'
 gem "will_paginate", :git=>"http://github.com/mislav/will_paginate.git",
         :branch=>"rails3"
-gem "honeypot-captcha", :git=>"http://github.com/curtis/honeypot-captcha.git"
 
 stategies << lambda do
   ["add_fields_to_users.rb",
@@ -17,7 +16,6 @@ stategies << lambda do
     "create_profiles.rb",
     "create_roles.rb"
   ].each {|file|  migration_template "db/migrate/#{file}", "db/migrate/#{file.split('.').first}"}
-
   route "wheels_resources"
   attr_accessor :bucket, :access_key_id, :secret_access_key
   say ("If you have your S3 info handy, put it in now.")

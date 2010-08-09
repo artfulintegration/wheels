@@ -32,6 +32,7 @@ class WheelsGenerator < Rails::Generators::Base
   end
 
   def bundle_install
+    run "pwd > foolio"
     run 'bundle install'
   end
 
