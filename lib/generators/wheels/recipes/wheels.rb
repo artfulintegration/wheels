@@ -7,13 +7,13 @@ gem 'inherited_resources', '1.1.2'
 gem 'has_scope'
 
 stategies << lambda do
-  ["add_fields_to_users.rb",
-    "create_blogs.rb",
-    "create_galleries.rb",
-    "create_images.rb",
-    "create_profiles.rb",
-    "create_roles.rb"
-  ].each {|file|  migration_template "db/migrate/#{file}", "db/migrate/#{file.split('.').first}"}
+  migration_template 'db/migrate/add_fields_to_users.rb', 'db/migrateadd_fields_to_users'
+  migration_template 'db/migrate/create_blogs.rb', 'db/migratecreate_blogs'
+  migration_template 'db/migrate/create_galleries.rb', 'db/migratecreate_galleries'
+  migration_template 'db/migrate/create_images.rb', 'db/migratecreate_images'
+  migration_template 'db/migrate/create_profiles.rb', 'db/migratecreate_profiles'
+  migration_template 'db/migrate/create_roles.rb', 'db/migratecreate_roles'
+
   route "wheels_resources"
   class_eval do
     attr_accessor :bucket, :access_key_id, :secret_access_key
