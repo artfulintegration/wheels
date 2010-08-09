@@ -1,0 +1,21 @@
+:css
+  #image_gallery li {
+    display: inline;
+    list-style: none;
+    width: 300px;
+    min-height: 300px;
+    float: left;
+    margin: 0 10px 10px 0;
+    text-align: center;
+  }
+
+%h1= gallery.name.empty? ? "Name your gallery" : gallery.name
+- if can? :update, gallery
+  = link_to 'Edit', edit_gallery_path(gallery)
+- if can? :manage, gallery
+  = link_to 'Destroy', gallery, "data-confirm"=>"You'll shoot your eye out!", :method=>"delete"
+%ul#image_gallery
+  - images.each do |image|
+    %li
+      = image_tag image.image.url(:medium)
+

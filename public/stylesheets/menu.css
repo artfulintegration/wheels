@@ -1,0 +1,101 @@
+div.jQueryMenu {
+  height: 41px;
+  background: url(images/menu/main-bg.png) repeat-x; }
+  div.jQueryMenu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left; }
+    div.jQueryMenu ul.menu {
+      padding-left: 30px; }
+  div.jQueryMenu li {
+    position: relative;
+    z-index: 9;
+    margin: 0;
+    padding: 0 5px 0 0;
+    display: block;
+    float: left; }
+    div.jQueryMenu li:hover > ul {
+      left: -2px; }
+  div.jQueryMenu a {
+    position: relative;
+    z-index: 10;
+    height: 41px;
+    display: block;
+    float: left;
+    line-height: 41px;
+    text-decoration: none;
+    font: normal 12px Trebuchet MS; }
+    div.jQueryMenu a:hover {
+      color: white; }
+      div.jQueryMenu a:hover span {
+        color: white; }
+  div.jQueryMenu span {
+    display: block;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: 95% 0; }
+  div.jQueryMenu ul ul a.parent span {
+    background-position: 95% 8px;
+    background-image: url(images/menu/item-pointer.gif); }
+  div.jQueryMenu ul ul a.parent:hover span {
+    background-image: url(images/menu/item-pointer-mover.gif); }
+  div.jQueryMenu a {
+    padding: 0 10px 0 10px;
+    line-height: 30px;
+    color: #e5e5e5; }
+  div.jQueryMenu span {
+    margin-top: 5px; }
+  div.jQueryMenu li {
+    background: url(images/menu/main-delimiter.png) 98% 4px no-repeat; }
+    div.jQueryMenu li.last {
+      background: none; }
+  div.jQueryMenu ul ul {
+    position: absolute;
+    top: 38px;
+    left: -999em;
+    width: 163px;
+    padding: 5px 0 0 0;
+    background: #2d2d2d;
+    margin-top: 1px; }
+    div.jQueryMenu ul ul li {
+      background: none; }
+    div.jQueryMenu ul ul a {
+      padding: 0 0 0 15px;
+      height: auto;
+      float: none;
+      display: block;
+      line-height: 24px;
+      color: #a9a9a9; }
+    div.jQueryMenu ul ul span {
+      margin-top: 0;
+      padding-right: 15px;
+      _padding-right: 20px;
+      color: #a9a9a9; }
+    div.jQueryMenu ul ul a:hover span {
+      color: white; }
+    div.jQueryMenu ul ul li {
+      width: 100%; }
+      div.jQueryMenu ul ul li.last {
+        background: none; }
+    div.jQueryMenu ul ul ul {
+      padding: 0;
+      margin: -38px 0 0 163px !important;
+      margin-left: 172px;
+      background: #292929; }
+      div.jQueryMenu ul ul ul ul {
+        background: #262626;
+        background: #232323; }
+  div.jQueryMenu li.back {
+    background: url(images/menu/lava.png) no-repeat right -44px !important;
+    background-image: url(images/menu/lava.gif);
+    width: 13px;
+    height: 44px;
+    z-index: 8;
+    position: absolute;
+    margin: -1px 0 0 -5px; }
+    div.jQueryMenu li.back .left {
+      background: url(images/menu/lava.png) no-repeat top left !important;
+      background-image: url(images/menu/lava.gif);
+      height: 44px;
+      margin-right: 8px; }

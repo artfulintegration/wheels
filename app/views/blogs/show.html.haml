@@ -1,0 +1,10 @@
+%p
+  %b Title:
+  = @blog.title
+%p
+  %b Body:
+  = raw @blog.body
+= link_to 'Edit', edit_resource_url
+\|
+= link_to 'Back', collection_url
+

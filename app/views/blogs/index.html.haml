@@ -1,0 +1,19 @@
+%h1 Someone's Blog
+
+- @blogs.each do |blog|
+  #ad-top
+    / Insert 468x60 banner advertisement
+  .entry
+    .entry-title= link_to blog.title, resource_url(blog)
+
+    .date Posted on #{blog.created_at}
+    .blog_body!= blog.body
+    .comments
+      %a{:href => "#"} 3 comments
+
+
+- if current_user.try(:id) == @user.id
+  = link_to 'New Blog Post', new_user_blog_path(@user)
+
+= will_paginate @blogs
+

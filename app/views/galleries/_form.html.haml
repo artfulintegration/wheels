@@ -1,0 +1,29 @@
+:css
+  #image_gallery li {
+    display: inline;
+    list-style: none;
+    width: 300px;
+    min-height: 300px;
+    float: left;
+    margin: 0 10px 10px 0;
+    text-align: center;
+  }
+= form_for @gallery do |f|
+  %h2 Gallery Name:
+  = f.text_field :name
+  = f.submit "Save Gallery"
+
+%ul#image_gallery
+  - paginated_images_for(@gallery).each do |image|
+    %li
+      = image_tag image.image.url(:medium)
+
+= will_paginate paginated_images_for(@gallery)
+
+#upload_form
+  = form_for [@gallery, Image.new(:gallery=>@gallery)], :html=>{:id=>'upload', :multipart=>true} do |f|
+    - params.slice(:CKEditor, :CKEditorFuncNum, :langCode).each do |key, val|
+      = hidden_field_tag key, val
+    = f.file_field :image
+    = f.submit :disable_with=>"Uploading..."
+

@@ -1,0 +1,28 @@
+= content_for(:head) do
+  = javascript_include_tag '/ckeditor/ckeditor.js'
+  = javascript_include_tag '/ckeditor/adapters/jquery.js'
+  :javascript
+    $(function(){
+      config = {
+        filebrowserBrowseUrl : '#{galleries_path}'
+      };
+      $('.ckeditor_textarea').ckeditor(config);
+    });
+
+= form_for [@blog.user, @blog], :html=>{:multipart=>true} do |f|
+  -if @blog.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@blog.errors.count, "error")} prohibited this blog from being saved:"
+      %ul
+        - @blog.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :body
+    = f.text_area :body, :class=>'ckeditor_textarea'
+  .actions
+    = f.submit 'Save'
+

@@ -1,0 +1,15 @@
+%h1 #{@user.profile.alias}'s Galleries
+%ul
+  - @galleries.each do |gallery|
+    %li
+      %h2= link_to (gallery.name || "No name"), gallery_path(gallery, ckeditor_params)
+      - unless gallery.images.empty?
+        = image_tag gallery.images[0].image.url(:medium)
+      - if can? :update, gallery
+        = link_to 'Edit', edit_gallery_path(gallery, ckeditor_params)
+      - if can? :manage, gallery
+        = link_to 'Destroy', gallery_path(gallery, ckeditor_params), "data-confirm"=>"Sure? All the images from this gallery will be gone...", :method=>"delete"
+
+
+= link_to 'New gallery', new_gallery_path
+

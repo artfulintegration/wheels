@@ -1,0 +1,26 @@
+= form_for @profile, :url=>{:action=>"update"}, :html=>{:multipart=>true} do |f|
+  -if @profile.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@profile.errors.count, "error")} prohibited this profile from being saved:"
+      %ul
+        - @profile.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :first_name
+    = f.text_field :first_name
+  .field
+    = f.label :last_name
+    = f.text_field :last_name
+  .field
+    = f.label :alias
+    = f.text_field :alias
+  .field
+    = f.label :about_me
+    = f.text_area :about_me
+  .field
+    = f.label :image
+    = f.file_field :image
+  .actions
+    = f.submit 'Save'
+

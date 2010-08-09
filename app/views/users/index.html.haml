@@ -1,0 +1,19 @@
+%h1 Users
+%ul
+  - for user in @users
+    %li
+      %table.no_border
+        %tr
+          %td= link_to user.login, user_profile_path(user)
+          %td= "#{user.first_name} #{user.last_name}"
+          %td!= image_tag user.image.url(:thumb)
+          - if can? :manage, User
+            %td!= link_to 'Edit', edit_user_path(user)
+            %td!= link_to 'Destroy', user, "data-confirm"=>"Really delete #{user.alias}?", :method=>"delete"
+              %td{:id=>user.element_id(:confirm)}
+                - if user.confirmed_at
+                  Confirmed
+                - else
+                  = form_for user, :remote=>true do |f|
+                    = f.hidden_field
+

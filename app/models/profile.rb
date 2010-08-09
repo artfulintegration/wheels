@@ -1,0 +1,11 @@
+class Profile < ActiveRecord::Base
+  belongs_to :user
+  validates_uniqueness_of :alias
+  has_attached_file :image,
+      :storage => :s3,
+      :s3_credentials => "#{Rails.root}/config/amazon_s3.yml",
+      :path => "/:style/:filename",
+      :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
+end
+

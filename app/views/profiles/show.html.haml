@@ -1,0 +1,21 @@
+- if @profile.image_file_name
+  = image_tag @profile.image.url(:thumb)
+- else
+  - if can? :edit, @profile
+    - link_to 'Upload a photo', user_profile_path(@user)
+%p
+  %b First name:
+  = @profile.first_name
+%p
+  %b Last name:
+  = @profile.last_name
+%p
+  %b Alias:
+  = @profile.alias
+%p
+  %b About me:
+  = @profile.about_me
+
+- if current_user.try(:id) == @user.id
+  = link_to 'Edit', edit_user_profile_path(@user)
+
