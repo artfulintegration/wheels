@@ -19,22 +19,16 @@ class WheelsGenerator < Rails::Generators::Base
     initialize_templater
   end
 
-#  def load_recipes
-#    required_recipes = %w(default jquery haml rspec factory_girl remarkable devise cancan )
-#    required_recipes.each {|required_recipe| apply recipe(required_recipe)}
+  def load_recipes
+    required_recipes = %w(default jquery haml devise cancan postgresql)
+    required_recipes.each {|required_recipe| apply recipe(required_recipe)}
 
 #    apply recipe(ask("Which database? (m)ongoid or (p)ostgresql")=='m' ? 'mongoid' : 'postgresql')
 
-#    load_options
-#    apply(recipe('cucumber')) if yes?("Do you want to some cukes?")
-#    apply recipe('design')
-#  end
-  def load_recipes
-    run 'pwd'
-    required_recipes = %w(wheels)
-    required_recipes.each {|required_recipe| apply recipe(required_recipe)}
-
     load_options
+#    apply(recipe('cucumber')) if yes?("Do you want to some cukes?")
+    apply recipe('design')
+    apply recipe('wheels')
   end
 
   def bundle_install
