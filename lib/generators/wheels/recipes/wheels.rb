@@ -20,7 +20,7 @@ stategies << lambda do
   end
   say ("If you have your S3 info handy, put it in now.")
   for attribute in [:bucket, :access_key_id, :secret_access_key]
-    self.call "#{attribute}=", ask("What's the #{attribute.titleize}?")
+    self.call "#{attribute}=", ask("What's the #{attribute}?")
   end
   template 'config/amazon_s3.yml', 'config/amazon_s3.yml'
   run "git submodule add git://github.com/tylergannon/ckeditor.git public/ckeditor"
