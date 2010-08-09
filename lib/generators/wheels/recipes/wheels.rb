@@ -7,12 +7,12 @@ gem 'inherited_resources', '1.1.2'
 gem 'has_scope'
 
 stategies << lambda do
-  migration_template 'db/migrate/add_fields_to_users.rb', 'db/migrateadd_fields_to_users'
-  migration_template 'db/migrate/create_blogs.rb', 'db/migratecreate_blogs'
-  migration_template 'db/migrate/create_galleries.rb', 'db/migratecreate_galleries'
-  migration_template 'db/migrate/create_images.rb', 'db/migratecreate_images'
-  migration_template 'db/migrate/create_profiles.rb', 'db/migratecreate_profiles'
-  migration_template 'db/migrate/create_roles.rb', 'db/migratecreate_roles'
+  migration_template 'db/migrate/add_fields_to_users.rb', 'db/migrate/add_fields_to_users'
+  migration_template 'db/migrate/create_blogs.rb', 'db/migrate/create_blogs'
+  migration_template 'db/migrate/create_galleries.rb', 'db/migrate/create_galleries'
+  migration_template 'db/migrate/create_images.rb', 'db/migrate/create_images'
+  migration_template 'db/migrate/create_profiles.rb', 'db/migrate/create_profiles'
+  migration_template 'db/migrate/create_roles.rb', 'db/migrate/create_roles'
 
   route "wheels_resources"
   class_eval do
