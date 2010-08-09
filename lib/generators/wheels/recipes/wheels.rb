@@ -16,7 +16,7 @@ stategies << lambda do
     "create_images.rb",
     "create_profiles.rb",
     "create_roles.rb"
-  ].each {|file|  migration_template File.expand(file, 'db/migrate'), "db/migrate/#{file.split('.').first}"}
+  ].each {|file|  migration_template "db/migrate/#{file}", "db/migrate/#{file.split('.').first}"}
 
   route "wheels_resources"
   attr_accessor :bucket, :access_key_id, :secret_access_key
