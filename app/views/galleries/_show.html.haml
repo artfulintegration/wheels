@@ -11,9 +11,9 @@
 
 %h1= gallery.name.empty? ? "Name your gallery" : gallery.name
 - if can? :update, gallery
-  = link_to 'Edit', edit_gallery_path(gallery)
+  = link_to 'Edit', edit_gallery_path(gallery, ckeditor_params)
 - if can? :manage, gallery
-  = link_to 'Destroy', gallery, "data-confirm"=>"You'll shoot your eye out!", :method=>"delete"
+  = link_to 'Destroy', gallery_path(gallery, ckeditor_params), "data-confirm"=>"You'll shoot your eye out!", :method=>"delete"
 %ul#image_gallery
   - images.each do |image|
     %li

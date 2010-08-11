@@ -59,6 +59,7 @@ class WheelsGenerator < Rails::Generators::Base
   end
 
   def self.next_migration_number(dirname)
+
     if ActiveRecord::Base.timestamped_migrations
       Time.now.utc.strftime("%Y%m%d%H%M%S")
     else

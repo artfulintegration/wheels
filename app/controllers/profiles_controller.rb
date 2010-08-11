@@ -5,7 +5,7 @@ class ProfilesController < InheritedResources::Base
 
   def load_current_user
     unless params[:user_id]
-      @user ||= (current_user ? User.find(current_user.id) : User.super_user)
+      @user ||= (current_user ? User.find(current_user.id) : super_user)
     end
   end
 

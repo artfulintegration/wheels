@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wheels}
-  s.version = "0.0.4"
+  s.version = "0.0.17"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tyler Gannon"]
@@ -13,17 +13,13 @@ Gem::Specification.new do |s|
   s.description = %q{Call rails generate wheels.}
   s.email = %q{tgannon@gmail.com}
   s.extra_rdoc_files = [
-    "LICENSE",
-     "README.rdoc"
+    "README.rdoc"
   ]
   s.files = [
-    ".document",
-     ".gitignore",
-     "LICENSE",
+    "LICENSE",
      "README.rdoc",
      "Rakefile",
      "VERSION",
-     "app/controllers/application_controller.rb",
      "app/controllers/blogs_controller.rb",
      "app/controllers/galleries_controller.rb",
      "app/controllers/images_controller.rb",
@@ -74,6 +70,7 @@ Gem::Specification.new do |s|
      "db/migrate/create_images.rb",
      "db/migrate/create_profiles.rb",
      "db/migrate/create_roles.rb",
+     "db/migrate/insert_admin_user_and_roles.rb",
      "init.rb",
      "lib/generators/wheels/LICENCE",
      "lib/generators/wheels/USAGE",
@@ -102,6 +99,7 @@ Gem::Specification.new do |s|
      "lib/generators/wheels/templates/mongoid/features/support/hooks.rb",
      "lib/generators/wheels/wheels_generator.rb",
      "lib/wheels.rb",
+     "lib/wheels/action_controller_extensions.rb",
      "lib/wheels/routes.rb",
      "public/404.html",
      "public/422.html",
@@ -132,7 +130,6 @@ Gem::Specification.new do |s|
      "public/javascripts/jquery.growl.js",
      "public/javascripts/loadbehind.js",
      "public/javascripts/menu.js",
-     "public/stylesheets/.gitkeep",
      "public/stylesheets/dreamy.css",
      "public/stylesheets/menu.css",
      "public/stylesheets/sass/dreamy.sass",
@@ -154,18 +151,13 @@ Gem::Specification.new do |s|
      "public/stylesheets/ui-lightness/images/ui-icons_ffd27a_256x240.png",
      "public/stylesheets/ui-lightness/images/ui-icons_ffffff_256x240.png",
      "public/stylesheets/ui-lightness/jquery-ui-1.8.2.custom.css",
-     "test/helper.rb",
-     "test/test_wheels.rb"
+     "wheels.gemspec"
   ]
   s.homepage = %q{http://github.com/tylergannon/wheels}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Generator builds a web site with blog, user profile, etc.}
-  s.test_files = [
-    "test/test_wheels.rb",
-     "test/helper.rb"
-  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

@@ -3,6 +3,7 @@ class Image < ActiveRecord::Base
   has_attached_file :image,
       :storage => :s3,
       :s3_credentials => "#{Rails.root}/config/amazon_s3.yml",
-      :path => "/:style/:filename"
+      :path => "/:style/:filename",
+      :styles => { :medium => "300x300>", :thumb => "100x100>" }
 end
 

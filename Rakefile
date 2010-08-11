@@ -1,5 +1,17 @@
 require 'rubygems'
 require 'rake'
+PKG_FILES = FileList[
+  'wheels.gemspec',
+  'Gemfile',
+  'init.rb',
+  'Rakefile', 'README', 'LICENSE', 'README.rdoc', 'VERSION',
+  'app/**/*',
+  'config/**/*',
+  'db/**/*',
+  'lib/**/*',
+  'public/**/*',
+  'test/**/*'
+]
 
 begin
   require 'jeweler'
@@ -11,6 +23,10 @@ begin
     gem.homepage = "http://github.com/tylergannon/wheels"
     gem.authors = ["Tyler Gannon"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.files = PKG_FILES.to_a
+    gem.require_path = "lib"
+    gem.has_rdoc = false
+    gem.extra_rdoc_files = ["README.rdoc"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -51,3 +67,4 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+

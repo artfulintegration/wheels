@@ -1,4 +1,5 @@
 class Blog < ActiveRecord::Base
+  acts_as_taggable
   belongs_to :user
   validates_presence_of :user_id
   has_many :images

@@ -1,16 +1,12 @@
 class User < ActiveRecord::Base
-  before_create :create_profile
-  belongs_to :role
-
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable, :confirmable, :token_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def self.super_user
-    @@super_user ||= User.where(:role_id=>Role::SUPER).first
-  end
 
+  before_create :create_profile
+  belongs_to :role
   has_many :blogs, :dependent => :destroy
   has_one :profile, :dependent => :destroy
   has_many :galleries, :dependent => :destroy
@@ -23,6 +19,7 @@ class User < ActiveRecord::Base
     if role.kind_of? Role
       self.role_id = role.id
     else
+      role = role.to_s.camelize
       if role.is_numeric?
         self.role_id= role
       else
@@ -36,8 +33,8 @@ class User < ActiveRecord::Base
     save
   end
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation,
-                  :blogs, :profile, :role, :galleries
+#  # Setup accessible (or protected) attributes for your model
+#  attr_accessor :email, :password, :password_confirmation,
+#                  :blogs, :profile, :role, :galleries
 end
 

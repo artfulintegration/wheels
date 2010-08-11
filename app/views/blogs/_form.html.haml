@@ -1,13 +1,4 @@
-= content_for(:head) do
-  = javascript_include_tag '/ckeditor/ckeditor.js'
-  = javascript_include_tag '/ckeditor/adapters/jquery.js'
-  :javascript
-    $(function(){
-      config = {
-        filebrowserBrowseUrl : '#{galleries_path}'
-      };
-      $('.ckeditor_textarea').ckeditor(config);
-    });
+- include_ckeditor
 
 = form_for [@blog.user, @blog], :html=>{:multipart=>true} do |f|
   -if @blog.errors.any?

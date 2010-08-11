@@ -24,10 +24,10 @@ class GalleriesController < InheritedResources::Base
 
   def show
     show! do |format|
-      images = paginated_images_for(@gallery)
+      @images = paginated_images_for(@gallery)
       if params[:CKEditorFuncNum]
         format.html{
-          render :action=>:show, :layout=>"image_dialog", :locals=>{:images=>images}
+          render :action=>:show, :layout=>"image_dialog"
         }
       end
     end
@@ -44,7 +44,7 @@ class GalleriesController < InheritedResources::Base
 
   def load_user
     unless params[:user_id]
-      @user ||= (current_user ? User.find(current_user.id) : User.super_user)
+      @user ||= (current_user ? User.find(current_user.id) : super_user)
     end
   end
   helper_method :ckeditor_params, :paginated_images_for

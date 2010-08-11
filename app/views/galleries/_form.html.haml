@@ -25,5 +25,5 @@
     - params.slice(:CKEditor, :CKEditorFuncNum, :langCode).each do |key, val|
       = hidden_field_tag key, val
     = f.file_field :image
-    = f.submit :disable_with=>"Uploading..."
+    = f.submit "Upload Image", :disable_with=>"Uploading..."
 

@@ -1,4 +1,4 @@
-= render :partial => "show", :locals=>{:images=>images, :gallery=>@gallery}
+= render :partial => "show", :locals=>{:images=>@images, :gallery=>@gallery}
 
-= will_paginate images
+= will_paginate @images
 
