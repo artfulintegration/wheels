@@ -1,0 +1,6 @@
+%h1= @page.title
+.page_content!= @page.body
+
+- if can? :edit, @page
+  = link_to 'Edit', edit_page_path(@page)
+

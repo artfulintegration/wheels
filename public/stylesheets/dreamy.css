@@ -37,7 +37,8 @@ a {
 
 #header {
   height: 140px;
-  background: url(/images/dreamy/bg-header.jpg) no-repeat; }
+  background: url(/images/dreamy/bg-header.jpg) no-repeat;
+}
 
 #menu {
   height: 35px;
@@ -179,3 +180,4 @@ table.no_border {
   border-style: none;
   border-width: 0;
   cell-padding: 0; }
+

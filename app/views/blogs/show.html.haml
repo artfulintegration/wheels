@@ -1,9 +1,8 @@
-%p
-  %b Title:
-  = @blog.title
+%h1= @blog.title
+.tag_list!= tag_list @blog
 %p
   %b Body:
-  = raw @blog.body
+  != raw @blog.body
 = link_to 'Edit', edit_resource_url
 \|
 = link_to 'Back', collection_url

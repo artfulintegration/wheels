@@ -1,0 +1,19 @@
+- include_ckeditor
+
+= form_for @page do |f|
+  -if @page.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
+      %ul
+        - @page.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :body
+    = f.text_area :body, :class=>'ckeditor_textarea'
+  .actions
+    = f.submit 'Save'
+

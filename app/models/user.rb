@@ -1,18 +1,22 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable, :lockable and :timeoutable
-  devise :database_authenticatable, :registerable, :confirmable, :token_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-
-  before_create :create_profile
+  after_create :create_profile
   belongs_to :role
   has_many :blogs, :dependent => :destroy
   has_one :profile, :dependent => :destroy
   has_many :galleries, :dependent => :destroy
 
   def create_profile
-    self.profile ||= Profile.create(:user => self)
+    Profile.create(:user=>self) unless self.profile
+  end
+
+  def role?(role)
+    if role.kind_of?(Role)
+      return role==self.role
+    elsif role.is_numeric?
+      return self.role_id==role
+    else
+      return self.role.name.underscore==role.underscore
+    end
   end
 
   def role=(role)
@@ -33,8 +37,13 @@ class User < ActiveRecord::Base
     save
   end
 
-#  # Setup accessible (or protected) attributes for your model
-#  attr_accessor :email, :password, :password_confirmation,
-#                  :blogs, :profile, :role, :galleries
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable, :lockable and :timeoutable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :token_authenticatable, :confirmable, :lockable, :timeoutable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation
 end
 

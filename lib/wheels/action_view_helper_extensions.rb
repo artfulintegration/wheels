@@ -1,6 +1,6 @@
 module ActionViewHelperExtensions
   def super_user
-    @@super_user ||= User.where(:role_id=>Role::SUPER).first
+    @@super_user ||= User.where(:role_id=>Role.find_by_name("Super").id).first
   end
 end
 

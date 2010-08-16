@@ -1,4 +1,5 @@
 class Profile < ActiveRecord::Base
+  acts_as_tagger
   belongs_to :user
   validates_uniqueness_of :alias
   has_attached_file :image,

@@ -24,6 +24,7 @@
   = form_for [@gallery, Image.new(:gallery=>@gallery)], :html=>{:id=>'upload', :multipart=>true} do |f|
     - params.slice(:CKEditor, :CKEditorFuncNum, :langCode).each do |key, val|
       = hidden_field_tag key, val
-    = f.file_field :image
+    .upload_field= f.file_field :image
+    .tag_field= f.text_field :tag_list
     = f.submit "Upload Image", :disable_with=>"Uploading..."
 

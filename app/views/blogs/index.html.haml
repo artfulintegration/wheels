@@ -17,3 +17,7 @@
 
 = will_paginate @blogs
 
+- content_for(:tags) do
+  - for tag in @tags
+    %li= link_to tag.name, user_blogs_path(@user, :tag=>tag.name)
+

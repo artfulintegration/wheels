@@ -1,0 +1,4 @@
+class ActsAsTaggableOn::Tagging
+
+end
+

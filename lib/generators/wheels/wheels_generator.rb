@@ -20,7 +20,7 @@ class WheelsGenerator < Rails::Generators::Base
   end
 
   def load_recipes
-    required_recipes = %w(default jquery haml devise cancan postgresql)
+    required_recipes = %w(default jquery haml cancan postgresql)
     required_recipes.each {|required_recipe| apply recipe(required_recipe)}
 
 #    apply recipe(ask("Which database? (m)ongoid or (p)ostgresql")=='m' ? 'mongoid' : 'postgresql')
