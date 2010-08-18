@@ -1,6 +1,8 @@
-%h1= @page.title
-.page_content!= @page.body
+%h1= resource.title
+.page_content!= resource.body
 
 - if can? :edit, @page
   = link_to 'Edit', edit_page_path(@page)
+- if can? :manage, @page
+  = link_to 'Edit Access', access_control_entries_path(:resource_class=>"Page", :resource_id=>@page.id)
 

@@ -1,0 +1,6 @@
+- include_ckeditor
+= form_for [@discussion.forum, @discussion, @forum_message] do |f|
+  = f.hidden_field :author_id
+  = f.text_area :message, :class=>'ckeditor_textarea'
+  = f.submit
+

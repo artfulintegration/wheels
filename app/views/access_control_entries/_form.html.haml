@@ -1,0 +1,33 @@
+= form_for @access_control_entry, :remote=>true do |f|
+  -if @access_control_entry.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@access_control_entry.errors.count, "error")} prohibited this access_control_entry from being saved:"
+      %ul
+        - @access_control_entry.errors.full_messages.each do |msg|
+          %li= msg
+    = hidden_field_tag :container, "ace_listing"
+    = hidden_field_tag :ajax_function, "append"
+  %ul.ace_form_fields
+    %li
+      .name Email
+      = f.text_field :user_email, :class=>"email"
+    %li
+      .name Role
+      = f.select :role, Role.collection_entries
+    %li
+      .name Can?
+      = f.check_box :can
+    %li
+      .name verb
+      = f.text_field :verb, :class=>"verb"
+    %li
+      .name Resource
+      = f.select :resource_class_name, [["Forum", "Forum"], ["Page", "Page"]]
+      = f.hidden_field :resource_id
+    %li
+      .name options
+      = f.text_field :options_str, :class=>"verb"
+
+    %li
+      = f.submit 'Save', :disable_with=>"Saving..."
+

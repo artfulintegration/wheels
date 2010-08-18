@@ -1,0 +1,46 @@
+%h1 Listing Access Control Entries for
+
+%ul.listing#ace_listing
+  - @access_control_entries.each do |ace|
+    %li
+      %ul.ace{:id=>ace.element_id}
+        %li= ace.user.email if ace.user
+        %li= ace.role.name if ace.role
+        %li= ace.can ? "Can" : "Cannot"
+        %li= ace.verb
+        %li= ace.resource_class_name
+        %li= ace.options_str if ace.options_str
+        - if can? :edit, ace
+          %li= link_to "Edit", edit_access_control_entry_path(ace), :remote=>true
+        - if can? :destroy, ace
+          %li= link_to "X", ace, :method=>:delete, :remote=>true, "data-confirm"=>"Are you sure?"
+
+- if can? :create, AccessControlEntry
+  %h2 Enter a new Access Control Entry
+  = form_for new_ace, :remote=>true do |f|
+    = hidden_field_tag :container, "ace_listing"
+    = hidden_field_tag :ajax_function, "append"
+    %ul.ace_form_fields
+      %li
+        .name Email
+        = f.text_field :user_email, :class=>"email"
+      %li
+        .name Role
+        = f.select :role, Role.collection_entries
+      %li
+        .name Can?
+        = f.check_box :can
+      %li
+        .name verb
+        = f.text_field :verb, :class=>"verb"
+      %li
+        .name Resource
+        = f.select :resource_class_name, [["Forum", "Forum"], ["Page", "Page"]]
+        = f.hidden_field :resource_id
+      %li
+        .name options
+        = f.text_field :options_str, :class=>"verb"
+
+      %li
+        = f.submit 'Save', :disable_with=>"Saving..."
+

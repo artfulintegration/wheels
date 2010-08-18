@@ -1,0 +1,25 @@
+%h1 New discussion
+- include_ckeditor
+= form_for [@forum, @discussion] do |f|
+  -if @discussion.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@discussion.errors.count, "error")} prohibited this discussion from being saved:"
+      %ul
+        - @discussion.errors.full_messages.each do |msg|
+          %li= msg
+
+  %ul.form_fields
+    %li.field
+      = f.label :subject
+      = f.text_field :subject
+      = f.hidden_field :forum_id
+    %li.field
+      = f.fields_for :new_message, @new_message do |ff|
+        = ff.hidden_field :author_id
+        %ul.form_fields
+          %li.field= ff.text_area :message, :class=>'ckeditor_textarea'
+  .actions
+    = f.submit 'Create new discussion'
+
+= link_to 'Back', collection_url
+

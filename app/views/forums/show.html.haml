@@ -1,0 +1,20 @@
+%h1 Forum: #{@forum.name}
+
+.titled_box
+  .box_title Discussions in this forum
+  .box_contents
+    %ul
+      - for discussion in @forum.discussions.sort{|u,v| u.updated_at <=> v.update_at}
+        %li
+          = link_to discussion.subject, url_for([@forum, discussion])
+          - if can? :create, Discussion, :forum_id => @forum.id
+            = link_to "Reply to this topic", new_forum_discussion_forum_message_path(@forum, discussion)
+          - if can? :manage, discussion
+            = link_to "Manage", edit_forum_discussion_path(@forum, discussion)
+
+= content_for :links do
+  - if can? :create, Discussion, :forum_id=>@forum.id
+    %li= link_to "New topic in this forum", new_forum_discussion_path(@forum)
+  - if can? :manage, @forum
+    %li= link_to 'Edit', edit_forum_path(@forum)
+

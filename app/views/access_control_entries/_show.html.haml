@@ -1,0 +1,12 @@
+%ul.ace{:id=>resource.element_id}
+  %li= resource.user.email if resource.user
+  %li= resource.role.name if resource.role
+  %li= resource.can ? "Can" : "Cannot"
+  %li= resource.verb
+  %li= resource.resource_class_name
+  %li= resource.options_str if resource.options_str
+  - if can? :edit, resource
+    %li= link_to "Edit", edit_access_control_entry_path(resource), :remote=>true
+  - if can? :destroy, resource
+    %li= link_to "X", resource, :method=>:delete, :remote=>true, "data-confirm"=>"Are you sure?"
+

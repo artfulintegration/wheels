@@ -1,0 +1,11 @@
+%h1 Messages in #{@discussion.subject}
+- if can? :create, Discussion, :forum_id=>@discussion.forum.id
+  = link_to "Reply to this topic", new_resource_url
+
+%ul.listing
+  - for message in @forum_messages
+    %li
+      .content_box
+        .box_title Posted By #{message.author.email} on #{message.created_at}
+        .box_content!= message.message
+

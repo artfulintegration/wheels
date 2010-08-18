@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wheels}
-  s.version = "0.0.18"
+  s.version = "0.0.22"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tyler Gannon"]
-  s.date = %q{2010-08-16}
+  s.date = %q{2010-08-17}
   s.description = %q{Call rails generate wheels.}
   s.email = %q{tgannon@gmail.com}
   s.extra_rdoc_files = [
@@ -20,16 +20,27 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "app/controllers/access_control_entries_controller.rb",
      "app/controllers/blogs_controller.rb",
+     "app/controllers/discussions_controller.rb",
+     "app/controllers/forum_messages_controller.rb",
+     "app/controllers/forums_controller.rb",
      "app/controllers/galleries_controller.rb",
      "app/controllers/images_controller.rb",
      "app/controllers/pages_controller.rb",
      "app/controllers/profiles_controller.rb",
      "app/controllers/users_controller.rb",
+     "app/helpers/access_control_entries_helper.rb",
      "app/helpers/blogs_helper.rb",
+     "app/helpers/discussions_helper.rb",
+     "app/helpers/forums_helper.rb",
      "app/helpers/pages_helper.rb",
      "app/models/ability.rb",
+     "app/models/access_control_entry.rb",
      "app/models/blog.rb",
+     "app/models/discussion.rb",
+     "app/models/forum.rb",
+     "app/models/forum_message.rb",
      "app/models/gallery.rb",
      "app/models/image.rb",
      "app/models/page.rb",
@@ -38,12 +49,39 @@ Gem::Specification.new do |s|
      "app/models/role.rb",
      "app/models/tagging.rb",
      "app/models/user.rb",
+     "app/views/access_control_entries/_form.html.haml",
+     "app/views/access_control_entries/_index.html.haml",
+     "app/views/access_control_entries/_show.html.haml",
+     "app/views/access_control_entries/create.js.haml",
+     "app/views/access_control_entries/destroy.js.haml",
+     "app/views/access_control_entries/edit.html.haml",
+     "app/views/access_control_entries/edit.js.haml",
+     "app/views/access_control_entries/index.html.haml",
+     "app/views/access_control_entries/index.js.haml",
+     "app/views/access_control_entries/new.html.haml",
+     "app/views/access_control_entries/new.js.haml",
+     "app/views/access_control_entries/show.html.haml",
+     "app/views/access_control_entries/show.js.haml",
+     "app/views/access_control_entries/update.js.haml",
      "app/views/blogs/_form.html.haml",
      "app/views/blogs/edit.html.haml",
      "app/views/blogs/index.html.haml",
      "app/views/blogs/index.xml.builder",
      "app/views/blogs/new.html.haml",
      "app/views/blogs/show.html.haml",
+     "app/views/discussions/_form.html.haml",
+     "app/views/discussions/edit.html.haml",
+     "app/views/discussions/index.html.haml",
+     "app/views/discussions/new.html.haml",
+     "app/views/discussions/show.html.haml",
+     "app/views/forum_messages/_form.html.haml",
+     "app/views/forum_messages/index.html.haml",
+     "app/views/forum_messages/new.html.haml",
+     "app/views/forums/_form.html.haml",
+     "app/views/forums/edit.html.haml",
+     "app/views/forums/index.html.haml",
+     "app/views/forums/new.html.haml",
+     "app/views/forums/show.html.haml",
      "app/views/galleries/_form.html.haml",
      "app/views/galleries/_show.html.haml",
      "app/views/galleries/edit.html.haml",

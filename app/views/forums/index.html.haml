@@ -1,0 +1,23 @@
+%h1 Forums Home
+
+- if can? :create, Forum
+  %h2 Open a New Forum
+  = form_for Forum.new do |f|
+    %ul.form_fields
+      %li.field
+        Name:
+        = f.text_field :name
+      %li.action
+        = f.submit
+
+= content_for :links do
+  %h2 Forums:
+  - @forums.each do |forum|
+    %li.important_link
+      = link_to "#{forum.name} ->", forum
+      - if can? :create, Discussion, :forum_id=>forum.id
+        = link_to "ReplyTo", new_forum_discussion_path(forum)
+      - if can? :manage, forum
+        != "|" + link_to("Manage", edit_forum_path(forum))
+  %li.important_link= link_to 'New forum', new_forum_path if can? :create, Forum
+

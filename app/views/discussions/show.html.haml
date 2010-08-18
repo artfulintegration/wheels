@@ -1,0 +1,16 @@
+%h2 #{@forum.name} > #{@discussion.subject}
+
+%ul
+  - for message in @discussion.forum_messages
+    %li
+      .named_box
+        .box_title
+          Posted By #{message.author.email} on #{message.updated_at}
+        .box_content!= message.message
+
+= content_for :links do
+  %ul
+    - if can? :create, Discussion, :forum_id=>@forum.id
+      %li= link_to "Reply to this discussion", new_forum_discussion_forum_message_path(@forum, @discussion)
+    %li= link_to 'Back to Forum', @forum
+

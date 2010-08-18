@@ -1,0 +1,10 @@
+%h1 Listing discussions in forum #{@forum.name}
+= link_to 'New discussion', new_resource_url if can? :create, Discussion, :forum_id=>@forum.id
+
+%ul
+  - for discussion in @discussions.sort{|u,v| u.updated_at <=> v.update_at}
+    %li
+      = link_to discussion.subject, url_for([@forum, discussion])
+      - if can? :manage, discussion
+        = link_to "Manage", edit_forum_discussion_path(@forum, discussion)
+

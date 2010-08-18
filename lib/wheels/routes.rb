@@ -12,13 +12,26 @@ module ActionDispatch::Routing
       resources :users do
         resource :profile
         resources :galleries
-        resources :blogs, :path=>"blog" do
-          resources :blog_images, :path=>"images"
+        resources :blogs, :path=>"blog"
+      end
+
+      resources :layouts
+      resources :forums do
+        resources :discussions do
+          resources :forum_messages
         end
       end
-      scope :module=>"admin" do
+
+      resources :pages, :only => [:index, :show]
+      scope "/publish" do
+        resources :pages
+      end
+
+      scope "/admin" do
+        resources :access_control_entries
         resources :users
       end
+
     end
   end
 end
