@@ -1,0 +1,3 @@
+- if resource.errors.any?
+  = growl('Error', raw(render_js('errors')), :error)
+

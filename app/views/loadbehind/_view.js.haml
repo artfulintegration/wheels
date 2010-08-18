@@ -1,0 +1,5 @@
+setUpDocument($('##{container}'));
+- unless flash[:notice].empty?
+  = growl("Success", flash[:notice])
+  - flash.discard
+

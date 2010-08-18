@@ -1,0 +1,65 @@
+:css
+  .growl_box {
+    width: 225px;
+    border: 0px;
+    cellpadding: 0px;
+    cellspacing: 0px;
+  }
+  .growl_top {
+    background-image: url(/images/growl/growl_top.png);
+    width: 225px;
+    height: 49px;
+    background-repeat: no-repeat;
+    color: #fff;
+  }
+  .growl_top_img {
+    max-width: 25px;
+    max-height: 25px;
+    text-align: center;
+    margin-left: 19px;
+    margin-top: 19px;
+  }
+  .growl_title {
+    font-size: 18px;
+    margin: 0pt;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    display: inline;
+  }
+  td.growl_content {
+    background-image: url(/images/growl/growl_repeat.png);
+    width: 225px;
+    background-repeat: repeat-y;
+    color: #ddd;
+  }
+
+  p.growl_content {
+    margin: 20px;
+  }
+  .growl_bottom {
+    background-image: url(/images/growl/growl_bottom.png);
+    background-repeat: no-repeat;
+    width: 225px;
+    height: 27px;
+    vertical-align: top;
+    horizontal-align: right;
+  }
+  a.growl_close {
+    margin-right: 25px;
+    font-size: 10px;
+    color: #fff;
+    text-align: right;
+  }
+
+%table.growl_box
+  %tr
+    %td.growl_top
+      %img.growl_top_img{:src=>"%image%"}
+      %h1.growl_title %title%
+  %tr
+    %td.growl_content
+      %p.growl_content %message%
+  %tr
+    %td.growl_bottom
+      a.growl_close{:href=>"#", :onclick=>"return false;" :rel=>"close"} Close
+
