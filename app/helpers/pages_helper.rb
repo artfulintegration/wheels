@@ -1,11 +1,13 @@
 module PagesHelper
-  def include_ckeditor
-    content_for :head do
-      javascript_include_tag('/ckeditor/ckeditor.js',
-        '/ckeditor/adapters/jquery.js',
-        "galleries/configure_ckeditor.js")
-    end
+  def form_url
+    @parent_page ? page_children_path(@parent_page) : page_path(@page)
+  end
+  def form_object
+    @parent_page ? [@parent_page, @page] : @page
   end
 
+  def to_html_options(pages)
+    pages.map{|p| [p.title, p.id]}
+  end
 end
 

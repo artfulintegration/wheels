@@ -5,7 +5,7 @@
       - resource.errors.full_messages.each do |msg|
         %li= msg
 
-= form_for [@product_revision, @attachment], :html=>{:multipart=>true} do |f|
+= form_for [@page, @attachment], :html=>{:multipart=>true} do |f|
   = f.file_field :file, :id=>"file_input"
   = f.submit "Upload File", :id=>"upload_button"
 
@@ -15,18 +15,19 @@
   $(function() {
     $('#upload_button').hide();
     $('#file_input').uploadify ({
-      script          : '#{product_revision_attachments_path(@product_revision, :container=>'attachments_list')}',
+      script          : '#{page_attachments_path(@page, :container=>'attachments_list')}',
       uploader        : '/uploadify.swf',
       fileDataName    : 'attachment[file]',
       multi           : true,
       auto            : true,
+      buttonText      : 'New File',
       cancelImg       : '/images/uploadify/cancel.png',
       onComplete      : function(a, b, c, response){ eval(response); },
       scriptData      : {
         '_http_accept': 'application/javascript',
         '_method': 'post',
         '#{session_key_name}' : encodeURIComponent('#{u cookies[session_key_name]}'),
-        'authenticity_token': encodeURIComponent('#{u form_authenticity_token}'),
+        'authenticity_token': encodeURIComponent('#{raw form_authenticity_token}'),
         'session_encoded': '#{make_session_string}',
       }
     });

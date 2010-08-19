@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wheels}
-  s.version = "0.0.22"
+  s.version = "0.0.25"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tyler Gannon"]
-  s.date = %q{2010-08-17}
+  s.date = %q{2010-08-18}
   s.description = %q{Call rails generate wheels.}
   s.email = %q{tgannon@gmail.com}
   s.extra_rdoc_files = [
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
      "app/controllers/profiles_controller.rb",
      "app/controllers/users_controller.rb",
      "app/helpers/access_control_entries_helper.rb",
+     "app/helpers/application_helper.rb",
      "app/helpers/blogs_helper.rb",
      "app/helpers/discussions_helper.rb",
      "app/helpers/forums_helper.rb",
@@ -102,11 +103,25 @@ Gem::Specification.new do |s|
      "app/views/images/update.js.haml",
      "app/views/layouts/application.html.haml",
      "app/views/layouts/image_dialog.html.haml",
+     "app/views/loadbehind/_destroy.js.haml",
+     "app/views/loadbehind/_edit.js.haml",
+     "app/views/loadbehind/_errors.html.haml",
+     "app/views/loadbehind/_growl_template.html.haml",
+     "app/views/loadbehind/_show_box.html.haml",
+     "app/views/loadbehind/_view.js.haml",
+     "app/views/loadbehind/growl.js.haml",
+     "app/views/loadbehind/index.js.haml",
+     "app/views/pages/_child_pages_links.html.haml",
      "app/views/pages/_form.html.haml",
+     "app/views/pages/_form_fields.html.haml",
+     "app/views/pages/_show_attachment.html.haml",
+     "app/views/pages/_show_small.html.haml",
+     "app/views/pages/create.js.haml",
      "app/views/pages/edit.html.haml",
      "app/views/pages/index.html.haml",
      "app/views/pages/new.html.haml",
      "app/views/pages/show.html.haml",
+     "app/views/pages/update.js.haml",
      "app/views/profiles/_form.html.haml",
      "app/views/profiles/edit.html.haml",
      "app/views/profiles/index.html.haml",
@@ -173,6 +188,7 @@ Gem::Specification.new do |s|
      "lib/wheels/action_view_helper_extensions.rb",
      "lib/wheels/active_record_extensions.rb",
      "lib/wheels/active_record_user_extensions.rb",
+     "lib/wheels/flash_session_cookie_middleware.rb",
      "lib/wheels/routes.rb",
      "lib/wheels/user.rb",
      "lib/wheels/wheels_engine.rb",

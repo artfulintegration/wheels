@@ -1,10 +1,10 @@
 class Attachment < ActiveRecord::Base
-  validates_presence_of :resource_id, :resource_class_name, :file
+  validates_presence_of :file, :page_id
+  belongs_to :page
 
   has_attached_file :file,
       :storage => :s3,
       :s3_credentials => "#{Rails.root}/config/amazon_s3.yml",
-      :path => "/product_revision/:filename"
-
+      :path => "/attachments/:filename"
 end
 

@@ -12,5 +12,6 @@
 - @pages.each do |page|
   %h1= link_to page.title, page
   = link_to "Edit", edit_page_path(page) if can? :edit, page
-  .page_content!= page.body[0..5000]
+  .page_content!= page.body
+  %hr/
 

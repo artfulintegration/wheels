@@ -4,6 +4,11 @@ class User < ActiveRecord::Base
   has_many :blogs, :dependent => :destroy
   has_one :profile, :dependent => :destroy
   has_many :galleries, :dependent => :destroy
+  has_many :access_control_entries, :dependent=>:destroy
+
+  def self.nobody
+    User.new(:role=>"Nobody")
+  end
 
   def create_profile
     Profile.create(:user=>self) unless self.profile
@@ -36,12 +41,7 @@ class User < ActiveRecord::Base
     self.confirmed_at = DateTime::now
     save
   end
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable, :lockable, :timeoutable
 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable, :lockable and :timeoutable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable, :lockable, :timeoutable
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation
 end
 

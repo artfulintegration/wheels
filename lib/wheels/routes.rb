@@ -22,9 +22,9 @@ module ActionDispatch::Routing
         end
       end
 
-      resources :pages, :only => [:index, :show]
-      scope "/publish" do
-        resources :pages
+      resources :pages do
+        resources :attachments
+        resources :children, :controller=>"pages", :as => "children"
       end
 
       scope "/admin" do

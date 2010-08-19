@@ -50,7 +50,7 @@ class AccessControlEntry < ActiveRecord::Base
 
   def configure(ability)
     raise "I only like Ability" unless ability.class==Ability
-    if self.can ?
+    if self.can
       puts "can #{verb.to_sym.inspect}, #{resource.inspect}, #{options.inspect}"
       ability.can verb.to_sym, resource, options
     else

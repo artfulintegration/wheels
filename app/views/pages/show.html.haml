@@ -1,8 +1,22 @@
 %h1= resource.title
 .page_content!= resource.body
 
-- if can? :edit, @page
-  = link_to 'Edit', edit_page_path(@page)
+= render :partial => "child_pages_links"
+
 - if can? :manage, @page
-  = link_to 'Edit Access', access_control_entries_path(:resource_class=>"Page", :resource_id=>@page.id)
+  = content_for :sidebar do
+    %ul
+      %li.sidebar_title Manage This Page
+      %li= link_to 'Edit', edit_page_path(@page)
+
+- if @parent_page
+  = content_for :links do
+    %li= link_to "< #{@parent_page.title}", @parent_page
+
+- unless @page.attachments.empty?
+  = content_for :sidebar do
+    %ul#attachments_list
+      %li.sidebar_title Files
+      - @page.attachments.each do |attachment|
+        = render :partial => "attachments/show", :locals=>{:a=>(@attachment=attachment)}
 
