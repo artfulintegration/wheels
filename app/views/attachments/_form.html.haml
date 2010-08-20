@@ -5,31 +5,24 @@
       - resource.errors.full_messages.each do |msg|
         %li= msg
 
-= form_for [@page, @attachment], :html=>{:multipart=>true} do |f|
+!= S3Provider.new(:key=>"attachments/#{current_user.id}").form_fields
+
+= form_for [@page, Attachment.new(:page=>@page)], :remote=>true, :html=>{:multipart=>true, :id=>"upload_form"} do |f|
   = f.file_field :file, :id=>"file_input"
+  = f.hidden_field :file_file_name, :id=>"file_file_name_input"
+  = f.hidden_field :file_file_size, :id=>"file_file_size_input"
+  = f.hidden_field :file_content_type, :id=>"file_content_type_input"
+  = f.hidden_field :file_updated_at, :id=>"file_updated_at_input"
   = f.submit "Upload File", :id=>"upload_button"
 
 = content_for :head do
   = javascript_include_tag *%w(swfobject jquery.uploadify)
-:javascript
-  $(function() {
+  :javascript
+    $(function(){
     $('#upload_button').hide();
-    $('#file_input').uploadify ({
-      script          : '#{page_attachments_path(@page, :container=>'attachments_list')}',
-      uploader        : '/uploadify.swf',
-      fileDataName    : 'attachment[file]',
-      multi           : true,
-      auto            : true,
-      buttonText      : 'New File',
-      cancelImg       : '/images/uploadify/cancel.png',
-      onComplete      : function(a, b, c, response){ eval(response); },
-      scriptData      : {
-        '_http_accept': 'application/javascript',
-        '_method': 'post',
-        '#{session_key_name}' : encodeURIComponent('#{u cookies[session_key_name]}'),
-        'authenticity_token': encodeURIComponent('#{raw form_authenticity_token}'),
-        'session_encoded': '#{make_session_string}',
-      }
     });
-  });
+
+= uploadify_s3(:file_input_selector => '#file_input', :button_text => 'Add File', |
+:on_success => %(function(f) {submitFileForm(f.name, f.size, f.type)}), |
+:on_error => %(function(type, text) {alert("Problem during file upload type: " + type + " text: " + text);}))
 

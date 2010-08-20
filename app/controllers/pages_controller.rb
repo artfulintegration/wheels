@@ -48,6 +48,7 @@ class PagesController < InheritedResources::Base
     edit! do |format|
       set_children
       @attachment = Attachment.new(:page=>@page)
+      @s3provider = S3Provider.new(:key=>"attachments/#{current_user.id}")
     end
   end
 

@@ -2,7 +2,7 @@
 = render :partial => "child_pages_links"
 
 - if params[:action]=="new"
-  = form_for form_object do |f|
+  = form_for resource do |f|
     = render :partial => "form_fields", :locals=>{:f=>f}
 - else
   = form_for form_object, {:url=>form_url} do |f|

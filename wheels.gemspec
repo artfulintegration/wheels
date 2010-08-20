@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wheels}
-  s.version = "0.0.25"
+  s.version = "0.0.29"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tyler Gannon"]
-  s.date = %q{2010-08-18}
+  s.date = %q{2010-08-19}
   s.description = %q{Call rails generate wheels.}
   s.email = %q{tgannon@gmail.com}
   s.extra_rdoc_files = [
@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "app/controllers/access_control_entries_controller.rb",
+     "app/controllers/attachments_controller.rb",
      "app/controllers/blogs_controller.rb",
      "app/controllers/discussions_controller.rb",
      "app/controllers/forum_messages_controller.rb",
@@ -38,6 +39,7 @@ Gem::Specification.new do |s|
      "app/helpers/pages_helper.rb",
      "app/models/ability.rb",
      "app/models/access_control_entry.rb",
+     "app/models/attachment.rb",
      "app/models/blog.rb",
      "app/models/discussion.rb",
      "app/models/forum.rb",
@@ -64,6 +66,19 @@ Gem::Specification.new do |s|
      "app/views/access_control_entries/show.html.haml",
      "app/views/access_control_entries/show.js.haml",
      "app/views/access_control_entries/update.js.haml",
+     "app/views/attachments/_form.html.haml",
+     "app/views/attachments/_index.html.haml",
+     "app/views/attachments/_show.html.haml",
+     "app/views/attachments/create.js.haml",
+     "app/views/attachments/destroy.js.haml",
+     "app/views/attachments/edit.js.haml",
+     "app/views/attachments/index.html.haml",
+     "app/views/attachments/index.js.haml",
+     "app/views/attachments/new.html.haml",
+     "app/views/attachments/new.js.haml",
+     "app/views/attachments/show.html.haml",
+     "app/views/attachments/show.js.haml",
+     "app/views/attachments/update.js.haml",
      "app/views/blogs/_form.html.haml",
      "app/views/blogs/edit.html.haml",
      "app/views/blogs/index.html.haml",
@@ -112,6 +127,7 @@ Gem::Specification.new do |s|
      "app/views/loadbehind/growl.js.haml",
      "app/views/loadbehind/index.js.haml",
      "app/views/pages/_child_pages_links.html.haml",
+     "app/views/pages/_control_panel.html.haml",
      "app/views/pages/_form.html.haml",
      "app/views/pages/_form_fields.html.haml",
      "app/views/pages/_show_attachment.html.haml",

@@ -1,0 +1,12 @@
+$(function(){
+$('#upload_button').hide();
+});
+
+function submitFileForm(fileName, fileSize, updatedAt, contentType) {
+$('#file_file_name_input').val(fileName);
+$('#file_file_size_input').val(fileSize);
+$('#file_update_at').val(updatedAt);
+$('#file_content_type').val(contentType);
+$('#upload_form').submit();
+}
+
