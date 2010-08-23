@@ -10,8 +10,6 @@ module PagesHelper
     pages.map{|p| [p.title, p.id]}
   end
 
-
-
   ######################################################
   ##
   ##

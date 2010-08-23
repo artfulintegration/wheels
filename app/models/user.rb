@@ -7,7 +7,11 @@ class User < ActiveRecord::Base
   has_many :access_control_entries, :dependent=>:destroy
 
   def self.nobody
-    User.new(:role=>"Nobody")
+    User.new(:role=>Role.nobody)
+  end
+
+  def self.root
+    User.where(:role_id=>Role.root.id)[0]
   end
 
   def create_profile

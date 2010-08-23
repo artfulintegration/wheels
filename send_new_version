@@ -3,4 +3,4 @@ rake gemspec
 rm *.gem
 gem build wheels.gemspec
 find *.gem | xargs gem push
-
+sudo gem install wheels

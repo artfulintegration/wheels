@@ -1,8 +1,6 @@
-%h1 Someone's Blog
+%h1= @user.profile.blog_title
 
-- @blogs.each do |blog|
-  #ad-top
-    / Insert 468x60 banner advertisement
+- collection.each do |blog|
   .entry
     .entry-title= link_to blog.title, resource_url(blog)
 
@@ -15,9 +13,9 @@
 - if current_user.try(:id) == @user.id
   = link_to 'New Blog Post', new_user_blog_path(@user)
 
-= will_paginate @blogs
+= will_paginate collection
 
 - content_for(:tags) do
-  - for tag in @tags
+  - for tag in tags
     %li= link_to tag.name, user_blogs_path(@user, :tag=>tag.name)
 

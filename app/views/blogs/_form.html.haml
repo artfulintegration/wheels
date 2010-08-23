@@ -9,14 +9,14 @@
           %li= msg
 
   .field
-    = f.label :title
+    .fieldTitle Title
     = f.text_field :title
   .field
-    = f.label "tag_list"
-    .tag_list= f.text_area :tag_list
-  .field
-    = f.label :body
+    .fieldTitle Body
     = f.text_area :body, :class=>'ckeditor_textarea'
+  .field
+    .fieldTitle Tags:
+    .tag_list= f.text_field :tag_list
   .actions
     = f.submit 'Save'
 

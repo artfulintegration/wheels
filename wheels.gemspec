@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{wheels}
-  s.version = "0.0.29"
+  s.version = "0.0.39"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tyler Gannon"]
-  s.date = %q{2010-08-19}
+  s.date = %q{2010-08-22}
   s.description = %q{Call rails generate wheels.}
   s.email = %q{tgannon@gmail.com}
   s.extra_rdoc_files = [
@@ -50,6 +50,7 @@ Gem::Specification.new do |s|
      "app/models/page_revision.rb",
      "app/models/profile.rb",
      "app/models/role.rb",
+     "app/models/s3_provider.rb",
      "app/models/tagging.rb",
      "app/models/user.rb",
      "app/views/access_control_entries/_form.html.haml",
@@ -69,6 +70,7 @@ Gem::Specification.new do |s|
      "app/views/attachments/_form.html.haml",
      "app/views/attachments/_index.html.haml",
      "app/views/attachments/_show.html.haml",
+     "app/views/attachments/_uploadify.html.erb",
      "app/views/attachments/create.js.haml",
      "app/views/attachments/destroy.js.haml",
      "app/views/attachments/edit.js.haml",
@@ -146,9 +148,15 @@ Gem::Specification.new do |s|
      "app/views/users/index.html.haml",
      "config/amazon_s3.yml",
      "db/migrate/add_fields_to_users.rb",
+     "db/migrate/create_access_control_entries.rb",
+     "db/migrate/create_attachments.rb",
      "db/migrate/create_blogs.rb",
+     "db/migrate/create_discussions.rb",
+     "db/migrate/create_forum_messages.rb",
+     "db/migrate/create_forums.rb",
      "db/migrate/create_galleries.rb",
      "db/migrate/create_images.rb",
+     "db/migrate/create_pages.rb",
      "db/migrate/create_profiles.rb",
      "db/migrate/create_roles.rb",
      "db/migrate/insert_admin_user_and_roles.rb",
@@ -205,7 +213,9 @@ Gem::Specification.new do |s|
      "lib/wheels/active_record_extensions.rb",
      "lib/wheels/active_record_user_extensions.rb",
      "lib/wheels/flash_session_cookie_middleware.rb",
+     "lib/wheels/paperclip_interpolations.rb",
      "lib/wheels/routes.rb",
+     "lib/wheels/s3login_provider.rb",
      "lib/wheels/user.rb",
      "lib/wheels/wheels_engine.rb",
      "public/404.html",
@@ -261,6 +271,7 @@ Gem::Specification.new do |s|
      "public/stylesheets/ui-lightness/images/ui-icons_ffd27a_256x240.png",
      "public/stylesheets/ui-lightness/images/ui-icons_ffffff_256x240.png",
      "public/stylesheets/ui-lightness/jquery-ui-1.8.2.custom.css",
+     "public/test.html",
      "wheels.gemspec"
   ]
   s.homepage = %q{http://github.com/tylergannon/wheels}

@@ -5,8 +5,6 @@
       - resource.errors.full_messages.each do |msg|
         %li= msg
 
-!= S3Provider.new(:key=>"attachments/#{current_user.id}").form_fields
-
 = form_for [@page, Attachment.new(:page=>@page)], :remote=>true, :html=>{:multipart=>true, :id=>"upload_form"} do |f|
   = f.file_field :file, :id=>"file_input"
   = f.hidden_field :file_file_name, :id=>"file_file_name_input"
