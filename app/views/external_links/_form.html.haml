@@ -1,0 +1,18 @@
+= form_for @external_link, :remote=>true do |f|
+  -if @external_link.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@external_link.errors.count, "error")} prohibited this external_link from being saved:"
+      %ul
+        - @external_link.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :url
+    = f.text_field :url
+  .field
+    = f.label :link_text
+    = f.text_area :link_text
+    = hidden_field_tag :container, 'content_pane'
+    = hidden_field_tag :ajax_function, 'html'
+  .actions
+    = f.submit 'Save', :disable_with=>"Saving..."
+

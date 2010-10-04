@@ -8,7 +8,7 @@
           Posted By #{message.author.email} on #{message.updated_at}
         .box_content!= message.message
 
-= content_for :links do
+= sidebar_content do
   %ul
     - if can? :create, Discussion, :forum_id=>@forum.id
       %li= link_to "Reply to this discussion", new_forum_discussion_forum_message_path(@forum, @discussion)

@@ -1,31 +1,43 @@
 class AccessControlEntry < ActiveRecord::Base
   belongs_to :user
   belongs_to :role
+  belongs_to :resource, :polymorphic=>true
+  validates :resource_type, :presence=>true
 
-  scope :by_resource, lambda {|resource_class_name, resource_id|
-    where(:resource_class_name=>resource_class_name).
+  default_scope order(:position)
+
+  scope :by_resource, lambda {|resource_type, resource_id|
+    where(:resource_type=>resource_type).
     where(:resource_id=>resource_id)
   }
   scope :by_role, lambda {|role_id|
     where(:role_id=>role_id)
   }
   scope :by_class, lambda {|class_name|
-    where(:resource_class_name=>class_name)
+    where(:resource_type=>class_name)
   }
 
-  def resource
-    @resource ||= self.resource_class_name.constantize
-  end
-
   def resource=(res)
-    @resource = res
-    if res.type==Class
-      self.resource_class_name = res.name
+    @res = res
+    if res.is_a? Class then self.resource_type = res.name
     else
-      self.options[:id] = res.id
-      self.resource_class_name = res.class.name
+      self.resource_id = res.id
+      self.resource_type = res.class.name
     end
   end
+
+  def resource
+    unless @res
+      if resource_id
+        @res = resource_type.constantize.find(resource_id) unless resource_type.empty?
+      else
+        @res = resource_type.constantize unless resource_type.empty?
+      end
+    end
+    @res
+  end
+
+  def resource_class; resource_type.constantize unless resource_type.empty?; end;
 
   def options
     @options ||= (self.serialized_options ? eval(self.serialized_options) : {})
@@ -50,12 +62,15 @@ class AccessControlEntry < ActiveRecord::Base
 
   def configure(ability)
     raise "I only like Ability" unless ability.class==Ability
-    if self.can
-      puts "can #{verb.to_sym.inspect}, #{resource.inspect}, #{options.inspect}"
-      ability.can verb.to_sym, resource, options
+    able = self.can ? :can : :cannot
+    ability.send able, verb.to_sym, resource_type.try(:constantize), able_options
+  end
+
+  def able_options
+    if resource.is_a?(ActiveRecord::Base)
+      options.merge({:id=>resource.id})
     else
-      puts "cannot #{verb.to_sym.inspect}, #{resource.inspect}, #{options.inspect}"
-      ability.cannot verb.to_sym, resource, options
+      options
     end
   end
 
@@ -78,17 +93,11 @@ class AccessControlEntry < ActiveRecord::Base
   end
 
   def role=(role)
-    unless role.empty?
-      if role.kind_of? Role
-        self.role_id = role.id
-      else
-        role = role.to_s.camelize
-        if role.is_numeric?
-          self.role_id= role
-        else
-          self.role_id= Role.find_by_name(role).id
-        end
-      end
+    if role.kind_of? Role
+      self.role_id = role.id
+    else
+      role = role.to_s.camelize
+      self.role_id = (role.is_numeric? ? role : Role.find_by_name(role).id) unless role.empty?
     end
   end
 

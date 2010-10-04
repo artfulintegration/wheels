@@ -1,20 +1,16 @@
-%h1= resource.title
-.page_content!= resource.body
+= render :partial => "show"
 
-= render :partial => "child_pages_links"
-
-- if can? :manage, @page
-  = content_for :sidebar do
-    %ul
-      %li.sidebar_title Manage This Page
-      %li= link_to 'Edit', edit_page_path(@page)
-
-- if @parent_page
-  = content_for :links do
-    %li= link_to "< #{@parent_page.title}", @parent_page
+- if @sitemap && (@sitemap.parent != Sitemap.main_menu)
+  = nav_content do
+    .sidebar.parent_page= link_to @sitemap.parent.menu_text, @sitemap.parent.url
+- if @sitemap && !@sitemap.children.empty?
+  = nav_content do
+    .child_pages
+      - @child_pages.each do |child|
+        .sidebar= link_to child.menu_text, child.url
 
 - unless @page.attachments.empty?
-  = content_for :sidebar do
+  = nav_content do
     %ul#attachments_list
       %li.sidebar_title Files
       - @page.attachments.each do |attachment|

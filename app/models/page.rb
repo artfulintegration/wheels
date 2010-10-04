@@ -1,10 +1,8 @@
 class Page < ActiveRecord::Base
   has_many :attachments
-  validates_presence_of :title
-  belongs_to :parent, :class_name=>'Page', :foreign_key=>'parent_id'
-  has_many :children, :class_name=>'Page', :foreign_key=>'parent_id'
+  has_many :sitemaps, :as=>:resource
+  has_many :access_control_entries, :as=>:resource
+  alias_attribute :name, :title
   acts_as_taggable
-
-  scope :orphans, where(:parent_id=>nil)
 end
 

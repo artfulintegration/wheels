@@ -1,0 +1,8 @@
+Description:
+    Explain the generator
+
+Example:
+    rails generate wheels_checkout_assets Thing
+
+    This will create:
+        what/will/it/create

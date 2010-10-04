@@ -7,13 +7,8 @@
       Upload a file to this page.
       = render :partial=>'attachments/form'
     %li
-      Set an existing page as a child of current one
-      = form_for form_object, :url=>form_url, :remote=>true do |f|
-        = select_tag :child_id, options_for_select(to_html_options(Page.orphans))
-        = f.submit "Add Child"
-    %li
       Set permissions >>
-      = link_to 'Edit Access', access_control_entries_path(:resource_class=>"Page", :resource_id=>@page.id), |
+      = link_to 'Edit Access', access_control_entries_path(:resource_type=>"Page", :resource_id=>@page.id), |
       :confirm => "Are you sure?  Any unsaved changes on this page should be saved before leaving."
     %li= link_to 'New Page as child', new_page_path(:page_id=>@page.id), |
       :confirm => "Are you sure?  Any unsaved changes on this page should be saved before leaving."

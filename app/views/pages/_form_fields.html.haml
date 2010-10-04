@@ -7,10 +7,17 @@
 .field
   = f.label :title
   = f.text_field :title
-
 .field
+  .fieldName "Display Title for this page?"
+  = f.check_box :show_title
+
+.textarea
   = f.label :body
-  = f.text_area :body, :class=>'ckeditor_textarea'
+  = f.text_area :body, :class=>'ckeditor_textarea', :cols=>100, :rows=>25
+  = f.label :stylesheet
+  = f.text_area :stylesheet
+  = hidden_field_tag :container, 'content_pane'
+  = hidden_field_tag :ajax_function, 'html'
 .actions
-  = f.submit 'Save'
+  = f.submit 'Save', :disable_with=>"Saving..."
 

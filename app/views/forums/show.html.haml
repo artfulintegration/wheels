@@ -12,7 +12,7 @@
           - if can? :manage, discussion
             = link_to "Manage", edit_forum_discussion_path(@forum, discussion)
 
-= content_for :links do
+= sidebar_content do
   - if can? :create, Discussion, :forum_id=>@forum.id
     %li= link_to "New topic in this forum", new_forum_discussion_path(@forum)
   - if can? :manage, @forum

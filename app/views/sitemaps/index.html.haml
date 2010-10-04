@@ -1,0 +1,83 @@
+- include_ckeditor
+= content_for :head do
+  = javascript_include_tag %w(jquery.hotkeys jquery.cookie jquery.jstree)
+  = javascript_include_tag %(sitemap_jstree)
+  = stylesheet_link_tag %(admin)
+
+= sidebar_content do
+  #control_panel
+    #control_panel_handle
+      %h3 Control Panel
+    #sitemap_container
+      #sitemap.sitemap
+
+#content_pane
+#dialog_form
+
+:javascript
+  $(function () {
+    // $('#control_panel').draggable({handle: '#control_panel_handle', containment: '#content'}).resizable();
+
+    // Settings up the tree - using $(selector).jstree(options);
+    // All those configuration options are documented in the _docs folder
+    $.jstree._themes = '/jstree/themes/'
+    $("#sitemap")
+      .jstree(sitemapJsTreeConfig())
+      .bind("create.jstree", jstreeEventDeclarations()["create.jstree"])
+      .bind("remove.jstree", jstreeEventDeclarations()["remove.jstree"])
+      //  { "obj" : obj, "new_name" : new_name, "old_name" : old_name });
+      .bind("rename.jstree", jstreeEventDeclarations()["rename.jstree"])
+      .bind("select_node.jstree", jstreeEventDeclarations()["select_node.jstree"])
+      .bind("move_node.jstree", jstreeEventDeclarations()["move_node.jstree"]);
+  });
+
+  function createSiteMap(data, callback) {
+    $.post(
+      "#{sitemaps_path(:format=>:json)}",
+      {
+        "utf8" : "#{"&#x2713;".html_safe}",
+        #{authenticity_token_json}
+        "sitemap[menu_text]" : data['menu_text'],
+        "sitemap[position]" : data['position'],
+        "sitemap[resource_type]" : data['resource_type'],
+        "sitemap[resource_id]" : data['resource_id'],
+        "sitemap[parent_id]" : data['parent_id']
+      },
+      callback
+    );
+  }
+
+  function updateSiteMap(data, callback) {
+    post_data = {
+      "utf8" : "#{"&#x2713;".html_safe}",
+      "format" : "json",
+        #{authenticity_token_json}
+    }
+    if (data['parent_id'] != null) {post_data['parent_id'] = data['parent_id']}
+    if (data['menu_text'] != null) {post_data['sitemap[menu_text]'] = data['menu_text']}
+    if (data['position'] != null) {post_data['sitemap[position]'] = data['position']}
+    if (data['resource_id'] != null) {post_data['sitemap[resource_id]'] = data['resource_id']}
+    if (data['resource_type'] != null) {post_data['sitemap[resource_type]'] = data['resource_type']}
+
+    $.ajax({
+      async : false,
+      type: 'PUT',
+      url: "/sitemaps/" + data['id'].toString(),
+      data : post_data,
+      success: callback
+    });
+  }
+
+  function deleteSiteMap(node_id, callback) {
+    $.ajax({
+      async : false,
+      type: 'DELETE',
+      url: "/sitemaps/" + node_id.toString() + ".json",
+      data : {
+        "utf8" : "#{"&#x2713;".html_safe}",
+        #{authenticity_token_json}
+      },
+      success : callback
+    });
+  }
+

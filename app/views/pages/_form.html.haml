@@ -2,9 +2,26 @@
 = render :partial => "child_pages_links"
 
 - if params[:action]=="new"
-  = form_for resource do |f|
+  = form_for resource, :remote=>true do |f|
     = render :partial => "form_fields", :locals=>{:f=>f}
 - else
-  = form_for form_object, {:url=>form_url} do |f|
+  = form_for form_object, {:url=>form_url, :remote=>true} do |f|
     = render :partial => "form_fields", :locals=>{:f=>f}
+
+= content_for :head do
+  = javascript_include_tag 'jquery-validate/jquery.validate.pack'
+
+:javascript
+  $(function(){
+  jQuery.validator.addMethod("verify_user", function(value, element, params) {
+  //alert($(element).attr('data-verify-user-path'));
+  xhr = $.ajax({
+  async: false,
+  url: $(element).attr('data-verify-user-path')+ '?password='+value
+  });
+  return xhr.responseText=="true";
+  }, "Password is incorrect.");
+
+  $('form').validate();
+  });
 

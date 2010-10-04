@@ -1,0 +1,23 @@
+{
+  data: {
+    title=>
+  }
+    :data=>{
+      :title=>self.menu_text,
+      :icon=>icon_name,
+    },
+    :attr=>{
+      :id=>"node_#{id}",
+      :data_resource_type => self.resource_type,
+      :data_resource_id => self.resource_id,
+      :data_edit_path =>
+    },
+    :state=>treeview_state,
+    :children=>children.map{|t| t.to_jstree(false)}
+}
+
+def to_jstree(root=true)
+  r =
+  root ? r.to_json : r
+end
+

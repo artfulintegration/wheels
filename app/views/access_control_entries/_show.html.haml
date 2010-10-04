@@ -3,7 +3,7 @@
   %li= resource.role.name if resource.role
   %li= resource.can ? "Can" : "Cannot"
   %li= resource.verb
-  %li= resource.resource_class_name
+  %li= resource.resource_type
   %li= resource.options_str if resource.options_str
   - if can? :edit, resource
     %li= link_to "Edit", edit_access_control_entry_path(resource), :remote=>true

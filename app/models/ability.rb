@@ -11,7 +11,7 @@ class Ability
 
   def initialize(user)
     user ||= User.nobody
-    puts all_aces_for(user).map{|t| "#{t.resource_class_name} #{t.options.inspect}"}.join("\n")
+    puts all_aces_for(user).map{|t| "#{t.resource_type} #{t.options.inspect}"}.join("\n")
     self.class.initializers.each{|t| self.send(t, user)}
     all_aces_for(user).each do |ace|
       ace.configure(self)
@@ -36,6 +36,7 @@ class Ability
         can :manage, Blog, :user_id => user.id
         can :edit, Profile, :user_id => user.id
         cannot :read, User
+        can :edit, User, :id => user.id
     end
   end
 end

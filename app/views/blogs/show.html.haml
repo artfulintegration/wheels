@@ -1,9 +1,25 @@
-%h1= @blog.title
-.tag_list!= tag_list @blog
-%p
-  %b Body:
-  != raw @blog.body
-= link_to 'Edit', edit_resource_url
-\|
+
+.entry
+  .entry-title= link_to resource.title, resource_url(resource)
+
+  .date Posted on #{resource.created_at}
+  .blog_body!= resource.body
+  .tags!= tag_list resource
+
+  .comments
+    %a{:href => "#"} 3 comments
+
+
+
+= will_paginate collection
+
+- content_for(:tags) do
+  - for tag in tags
+    %li= link_to tag.name, user_blogs_path(parent, :tag=>tag.name)
+
+
 = link_to 'Back', collection_url
+= link_to '| Edit', edit_resource_url if can? :edit, resource
+- if current_user.try(:id) == parent.id
+  = link_to '| New Blog Post', new_user_blog_path(parent)
 

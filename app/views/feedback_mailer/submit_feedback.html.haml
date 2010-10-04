@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %meta{:content=>"text/html; charset=UTF-8", "http-equiv"=>"Content-Type"}
+  %body
+    %h1 A user submitted feedback to cagym.com.
+    %p
+      %b Name:
+      = @feedback.name
+    %p
+      %b Phone:
+      = @feedback.phone
+    %p
+      %b Email:
+      = @feedback.email
+    %p
+      %b Message:
+      = @feedback.message
+    %p
+      %b Want response:
+      = @feedback.want_response ? "Yes" : "No"
+

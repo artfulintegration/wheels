@@ -5,6 +5,6 @@ class Image < ActiveRecord::Base
       :storage => :s3,
       :s3_credentials => "#{Rails.root}/config/amazon_s3.yml",
       :path => "/images/:user_email/:style/:filename",
-      :styles => {:medium => "300x300>", :thumb => "100x100>" }
+      :styles => {:large=>"700x700>", :medium => "300x300>", :thumb => "100x100>" }
 end
 

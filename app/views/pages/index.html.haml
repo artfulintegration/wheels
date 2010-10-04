@@ -2,12 +2,14 @@
 
 = content_for :links do
   - @pages.each do |page|
-    %li
+    %li{:id=>page.element_id}
       = link_to page.title, page
       - if can? :edit, @page
         = link_to '| Edit', edit_page_path(page)
       - if can? :manage, @page
-        = link_to '| Access Ctrl', access_control_entries_path(:resource_class=>"Page", :resource_id=>page.id)
+        = link_to '| Delete', page_path(page), :remote=>true, "data-confirm" => "Are you sure?", :method=>"delete"
+      - if can? :manage, @page
+        = link_to '| Access Ctrl', access_control_entries_path(:resource_type=>"Page", :resource_id=>page.id)
 
 - @pages.each do |page|
   %h1= link_to page.title, page

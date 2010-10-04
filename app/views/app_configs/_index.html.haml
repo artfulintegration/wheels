@@ -1,0 +1,6 @@
+%ul#app_configs
+  - collection.each do |app_config|
+    %li
+      .fieldName= app_config.name
+      .fieldValue= app_config.value
+

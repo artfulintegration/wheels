@@ -2,11 +2,13 @@ require 'rails/generators'
 require 'rails/generators/migration'
 require 'rails/generators/generated_attribute'
 require 'rails/generators/active_record'
+require File.join(File.dirname(__FILE__), '../core_extensions.rb')
 
 class WheelsGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
-  require File.join(File.dirname(__FILE__), 'core_extensions.rb')
+  require File.join(File.dirname(__FILE__), '../core_extensions.rb')
   source_root File.expand_path('../../../../', __FILE__)
+  SOURCE_ROOT = source_root
   desc "Installs files needed for App Template gem."
 
 #      argument :scope, :required => false, :default => nil,

@@ -12,12 +12,16 @@ class BlogsController < InheritedResources::Base
     end
   end
 
+  def parent
+    @user ||= User.find(params[:user_id])
+  end
+
   def tags
-    @tags ||= Blog.where(:user_id=>@user.id).tag_counts.sort{|t, u| t.count <=> u.count}
+    @tags ||= Blog.where(:user_id=>parent.id).tag_counts.sort{|t, u| t.count <=> u.count}
   end
 
   def collection
-    @blogs ||= Blog.where(:user_id=>@user.id).
+    @blogs ||= Blog.where(:user_id=>parent.id).
       paginate(:page => params[:page], :order => 'created_at DESC' )
   end
 

@@ -1,0 +1,19 @@
+%p
+  %b Name:
+  = @feedback.name
+%p
+  %b Phone:
+  = @feedback.phone
+%p
+  %b Email:
+  = @feedback.email
+%p
+  %b Message:
+  = @feedback.message
+%p
+  %b Want response:
+  = @feedback.want_response
+
+= link_to 'Edit', edit_feedback_path(@feedback)
+\|
+= link_to 'Back', feedbacks_path

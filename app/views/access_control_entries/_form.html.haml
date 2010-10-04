@@ -20,13 +20,13 @@
     %li
       .name verb
       = f.text_field :verb, :class=>"verb"
-    %li
-      .name Resource
-      = f.select :resource_class_name, [["Forum", "Forum"], ["Page", "Page"]]
-      = f.hidden_field :resource_id
-    %li
-      .name options
-      = f.text_field :options_str, :class=>"verb"
+    - if parent.is_a?(User) || parent.is_a? (Role)
+      %li
+        .name Resource
+        = f.select :resource_type, [["Forum", "Forum"], ["Page", "Page"]]
+        = f.hidden_field :resource_id
+    - else
+      = hidden_field_tag resource.class.name.foreign_key.to_sym, resource.id
 
     %li
       = f.submit 'Save', :disable_with=>"Saving..."

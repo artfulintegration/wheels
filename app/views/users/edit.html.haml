@@ -1,0 +1,53 @@
+%h1 Update your personal info:
+
+.form
+  = form_for resource do |f|
+    - if resource.errors.any?
+      #errorExplanation
+        %h2= "#{pluralize(resource.errors.count, "error")} prohibited this change:"
+        %ul
+          - resource.errors.full_messages.each do |msg|
+            %li= msg
+    .fieldGroup
+      = f.fields_for :profile do |pf|
+        - unless pf.object.company.empty?
+          .field
+            .fieldName= label_tag "Organization"
+            .fieldName= label_tag pf.object.company
+        .field
+          .fieldName= pf.label :first_name
+          .fieldValue= pf.text_field :first_name
+        .field
+          .fieldName= pf.label :last_name
+          .fieldValue= pf.text_field :last_name
+        .field
+          .fieldName= pf.label :title
+          .fieldValue= pf.text_field :title
+        .field
+          .fieldName= f.label :email
+          .fieldValue= f.text_field :email
+        .field
+          .fieldName= pf.label :phone
+          .fieldValue= pf.text_field :phone
+        .field
+          .fieldName= pf.label :address
+          .fieldValue= pf.text_field :address
+        .field
+          .fieldName= pf.label :city
+          .fieldValue= pf.text_field :city
+        .field
+          .fieldName= pf.label :state
+          .fieldValue= pf.text_field :state
+        .field
+          .fieldName= pf.label :zip
+          .fieldValue= pf.text_field :zip
+    .submit= f.submit "Update Account"
+
+:css
+  .extra_form_data {
+    display: none;
+  }
+
+= content_for :head do
+  = javascript_include_tag %w(jquery.validate jquery-validate/additional-methods.js)
+

@@ -1,0 +1,11 @@
+= form_for resource, :remote=>true do |f|
+  = hidden_field_tag :container, 'content_pane'
+  = hidden_field_tag :ajax_function, 'html'
+  .field
+    .fieldName Name:
+    .fieldValue= f.text_field :name
+  .field
+    .fieldName Value:
+    .fieldValue.text_area= f.text_area :value
+  .field= f.submit "Save", :disable_with=>"Saving..."
+
