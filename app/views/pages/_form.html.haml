@@ -1,12 +1,43 @@
-- include_ckeditor
-= render :partial => "child_pages_links"
 
-- if params[:action]=="new"
+= render :partial => "child_pages_links"
+-if @page.errors.any?
+  #errorExplanation
+    %h2= "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
+    %ul
+      - @page.errors.full_messages.each do |msg|
+        %li= msg
+
+#tabs
+  %ul
+    %li= link_to 'Page Text', '#field-body'
+    %li= link_to 'Files', '#field-attachments'
+    %li= link_to 'Stylesheet', '#field-stylesheet'
   = form_for resource, :remote=>true do |f|
-    = render :partial => "form_fields", :locals=>{:f=>f}
-- else
-  = form_for form_object, {:url=>form_url, :remote=>true} do |f|
-    = render :partial => "form_fields", :locals=>{:f=>f}
+    #field-body
+      .field
+        = f.label :title
+        = f.text_field :title
+      .field
+        .fieldName "Display Title for this page?"
+        = f.check_box :show_title
+      .textarea
+        = f.label :body
+        = f.text_area :body, :class=>'ckeditor_textarea', :size => "120x20"
+        = f.label :stylesheet
+        = hidden_field_tag :container, 'content_pane'
+        = hidden_field_tag :ajax_function, 'html'
+    #field-stylesheet
+      = f.text_area :stylesheet, :rows=>80, :cols=>20
+  #field-attachments
+    %ul#attachments_list
+      %li.sidebar_title Files
+      - @page.attachments.each do |attachment|
+        = render :partial => "attachments/edit", :locals=>{:a=>(@attachment=attachment)}
+      %li
+        Upload a file to this page.
+        = render :partial=>'attachments/form'
+
+
 
 = content_for :head do
   = javascript_include_tag 'jquery-validate/jquery.validate.pack'

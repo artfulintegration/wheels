@@ -2,6 +2,8 @@
 = content_for :head do
   = javascript_include_tag %w(jquery.hotkeys jquery.cookie jquery.jstree)
   = javascript_include_tag %(sitemap_jstree)
+  = javascript_include_tag %(uploadify/jquery.uploadify.v2.1.0.min)
+  = javascript_include_tag %(uploadify/swfobject)
   = stylesheet_link_tag %(admin)
 
 = sidebar_content do

@@ -1,0 +1,7 @@
+%li.attachment
+  %ul{:id=>@attachment.element_id}
+    %li= link_to @attachment.file.original_filename, @attachment.file.url
+    %li Size: #{number_to_human_size @attachment.file.size}
+    %li Modified: #{@attachment.updated_at.try(:strftime, "%D %R")}
+    %li= link_to 'Remove File', page_attachment_path(@page, @attachment), :method=>:delete, "data-confirm"=>'Are you sure?', :remote=>true
+

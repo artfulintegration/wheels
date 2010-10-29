@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :access_control_entries, :dependent=>:destroy
   before_create :create_profile
 
+  validates :role, :presence => true
+
   accepts_nested_attributes_for :profile
 
   def initialize(*args)
